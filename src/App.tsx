@@ -1,15 +1,15 @@
-import { OutputText, TextInput } from './components';
+import { Routes, Route } from 'react-router-dom';
 import AppWrapper from './AppWrapper.css';
+import { lazy } from 'react';
+
+const Home = lazy(() => import('./pages/home/home'));
 
 function App() {
   return (
     <AppWrapper>
-      <article className='inputText'>
-        <TextInput />
-      </article>
-      <article className='outputText'>
-        <OutputText />
-      </article>
+      <Routes>
+        <Route path='/' element={<Home />} />
+      </Routes>
     </AppWrapper>
   );
 }

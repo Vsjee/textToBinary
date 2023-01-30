@@ -1,7 +1,17 @@
-import './App.css';
+import { OutputText, TextInput } from './components';
+import AppWrapper from './AppWrapper.css';
 
 function App() {
-  return <div className='App'>sss</div>;
+  return (
+    <AppWrapper>
+      <article className='inputText'>
+        <TextInput />
+      </article>
+      <article className='outputText'>
+        <OutputText />
+      </article>
+    </AppWrapper>
+  );
 }
 
 export default App;

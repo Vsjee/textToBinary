@@ -1,11 +1,15 @@
 import TextField from '@mui/material/TextField';
 import { FormEvent, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { HistoryInfo } from '../../models';
+import { addHistoryItem, historyKey } from '../../redux/state/history';
 import { updateText } from '../../redux/state/text';
-import { toBinary } from '../../utilities';
+import { AppState } from '../../redux/store';
+import { setLocalStorage, toBinary } from '../../utilities';
 
 function TextInput() {
   const dispatch = useDispatch();
+  const historyState = useSelector((state: AppState) => state.history.history);
 
   const [text, setText] = useState<string>('');
 
@@ -18,6 +22,8 @@ function TextInput() {
     e.preventDefault();
     let bin = toBinary(text);
     dispatch(updateText({ text: bin }));
+    dispatch(addHistoryItem({ inputText: text, outputText: bin }));
+    setLocalStorage<HistoryInfo[]>(historyKey, historyState);
   };
 
   return (

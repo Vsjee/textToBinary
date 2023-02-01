@@ -5,9 +5,11 @@ function home() {
   return (
     <HomeWrapper>
       <article className='inputText'>
+        Enter text:
         <TextInput />
       </article>
       <article className='outputText'>
+        Your text to binary:
         <OutputText />
       </article>
     </HomeWrapper>

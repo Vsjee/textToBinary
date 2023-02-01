@@ -1,4 +1,9 @@
+import { useSelector } from 'react-redux';
+import { AppState } from '../../redux/store';
+
 function OutputText() {
-  return <h1>Your binary will be printed here</h1>;
+  const text = useSelector((state: AppState) => state.text.text);
+
+  return <section>{text}</section>;
 }
 export default OutputText;

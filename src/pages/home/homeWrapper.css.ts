@@ -5,6 +5,7 @@ const HomeWrapper = styled.section`
   justify-content: center;
   width: 90%;
   margin: 0 auto;
+  padding: 7rem 0%;
   gap: 5rem;
 
   .inputText,

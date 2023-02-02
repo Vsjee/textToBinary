@@ -1,1 +1,3 @@
-export { default as home } from '../pages/home/home';
+export * from './state/history';
+export * from './state/text';
+export * from './store';

@@ -10,16 +10,27 @@ import {
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { HistoryInfo } from '../../../models';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState, historyKey, removeHistoryItem } from '../../../redux';
+import { setLocalStorage } from '../../../utilities';
+import { useEffect } from 'react';
 
 interface Props {
   history: HistoryInfo[];
 }
 
 function HistoryTable({ history }: Props) {
-  const deleteHistoryItem = () => {
-    // dispatch(removeHistoryItem({ inputText: '', outputText: '' }));
+  const dispatch = useDispatch();
+  let data: HistoryInfo[] = useSelector((state: AppState) => state.history.history);
+
+  const deleteHistoryItem = (data: HistoryInfo) => {
+    dispatch(removeHistoryItem({ inputText: data.inputText, outputText: data.outputText }));
     console.log('test');
   };
+
+  useEffect(() => {
+    setLocalStorage(historyKey, data);
+  }, [data]);
 
   return (
     <TableContainer component={Paper}>
@@ -42,7 +53,9 @@ function HistoryTable({ history }: Props) {
               <TableCell align='right'>{item.outputText}</TableCell>
               <TableCell align='right'>
                 <Button
-                  onClick={() => deleteHistoryItem()}
+                  onClick={() =>
+                    deleteHistoryItem({ inputText: item.inputText, outputText: item.outputText })
+                  }
                   variant='outlined'
                   size='small'
                   startIcon={<DeleteIcon />}

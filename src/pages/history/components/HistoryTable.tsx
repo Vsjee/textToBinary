@@ -12,20 +12,24 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { HistoryInfo } from '../../../models';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState, historyKey, removeHistoryItem } from '../../../redux';
-import { setLocalStorage } from '../../../utilities';
-import { useEffect } from 'react';
+import { getLocalStorage, setLocalStorage } from '../../../utilities';
+import { useEffect, useState } from 'react';
 
 interface Props {
   history: HistoryInfo[];
+  modifyHistory: Function;
 }
 
-function HistoryTable({ history }: Props) {
+function HistoryTable({ history, modifyHistory }: Props) {
   const dispatch = useDispatch();
+  const [rerender, setRerender] = useState(true);
   let data: HistoryInfo[] = useSelector((state: AppState) => state.history.history);
 
   const deleteHistoryItem = (data: HistoryInfo) => {
     dispatch(removeHistoryItem({ inputText: data.inputText, outputText: data.outputText }));
-    console.log('test');
+    const dataTest: HistoryInfo[] = getLocalStorage(historyKey);
+    setRerender(!rerender);
+    modifyHistory(dataTest, rerender);
   };
 
   useEffect(() => {

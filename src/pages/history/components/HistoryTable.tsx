@@ -37,41 +37,43 @@ function HistoryTable({ history, modifyHistory }: Props) {
   }, [data]);
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label='simple table'>
-        <TableHead>
-          <TableRow>
-            <TableCell>History</TableCell>
-            <TableCell align='right'>inputText</TableCell>
-            <TableCell align='right'>outputText</TableCell>
-            <TableCell align='right'>Delete</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {history?.map((item, i) => (
-            <TableRow key={i} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell component='th' scope='row'>
-                {i + 1}
-              </TableCell>
-              <TableCell align='right'>{item.inputText}</TableCell>
-              <TableCell align='right'>{item.outputText}</TableCell>
-              <TableCell align='right'>
-                <Button
-                  onClick={() =>
-                    deleteHistoryItem({ inputText: item.inputText, outputText: item.outputText })
-                  }
-                  variant='outlined'
-                  size='small'
-                  startIcon={<DeleteIcon />}
-                >
-                  Delete
-                </Button>
-              </TableCell>
+    <Paper>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+          <TableHead>
+            <TableRow>
+              <TableCell>History</TableCell>
+              <TableCell align='right'>inputText</TableCell>
+              <TableCell align='right'>outputText</TableCell>
+              <TableCell align='right'>Delete</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {history?.map((item, i) => (
+              <TableRow key={i} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                <TableCell component='th' scope='row'>
+                  {i + 1}
+                </TableCell>
+                <TableCell align='right'>{item.inputText}</TableCell>
+                <TableCell align='right'>{item.outputText}</TableCell>
+                <TableCell align='right'>
+                  <Button
+                    onClick={() =>
+                      deleteHistoryItem({ inputText: item.inputText, outputText: item.outputText })
+                    }
+                    variant='outlined'
+                    size='small'
+                    startIcon={<DeleteIcon />}
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Paper>
   );
 }
 export default HistoryTable;

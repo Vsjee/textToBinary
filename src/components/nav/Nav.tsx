@@ -8,7 +8,9 @@ function Nav() {
       <AppBar position='static'>
         <Toolbar>
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-            toBinary
+            <Link to={'/'} style={{ color: 'white' }}>
+              toBinary
+            </Link>
           </Typography>
           <Link to={'/history'} style={{ color: 'white' }}>
             <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }}>
